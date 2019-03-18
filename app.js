@@ -7,4 +7,7 @@ app.get('/test', (req, res)=>{
     res.json({"express app working": true})
 });
 
+app.get('/', (req, res)=>{
+    res.json({"test": true})
+})
 module.exports = {app,}
