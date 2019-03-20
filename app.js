@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express();
 const userRouter = require('./routes/user');
+const postRouter = require('./routes/post');
 
 //Middleware
 app.use(cors());
@@ -22,6 +23,7 @@ app.get('/', (req, res)=>{
 })
 
 app.use('/user', userRouter)
+app.use('/post', postRouter)
 
 
 module.exports = {app,}
