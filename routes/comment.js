@@ -43,8 +43,8 @@ commentRouter.get('/:post_id',(req, res)=>{
     })
 })
 
-//Update comment  !!!!FIX- no error on Postman, but db not updated!!!!
-commentRouter.put('/:post_id', (req, res)=>{
+//Update comment  
+commentRouter.put('/:id', (req, res)=>{
     const {id} = req.params;
     const {comment_text} = req.body;
     commentService.update(id, comment_text)
@@ -63,10 +63,10 @@ commentRouter.put('/:post_id', (req, res)=>{
     })
 })
 
-//Delete comment !!!!FIX- no error on Postman, but db not updated!!!!
-commentRouter.delete('/:post_id', (req, res)=>{
-    const {post_id} = req.params;
-    commentService.delete(post_id)
+//Delete comment 
+commentRouter.delete('/:id', (req, res)=>{
+    const {id} = req.params;
+    commentService.delete(id)
     .then(()=>{
         res.status(200)
         res.json({
