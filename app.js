@@ -8,6 +8,7 @@ const postRouter = require('./routes/post');
 const commentRouter = require('./routes/comment');
 const likeRouter = require('./routes/like');
 
+
 //Middleware
 app.use(cors());
 // parse application/x-www-form-urlencoded

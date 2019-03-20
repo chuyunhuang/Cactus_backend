@@ -2,6 +2,7 @@ jest.mock('../services/dbConnect');
 const db = require('../services/dbConnect');
 const userService = require('../services/userService');
 
+
 // test('CREATE user returns a promise', done =>{
 //     db.none.mockImplementation((...rest)=>Promise.resolve())
 //     userService.create({
@@ -28,3 +29,4 @@ test('READ user returns a promise', done =>{
         done()
     })
 })
+
