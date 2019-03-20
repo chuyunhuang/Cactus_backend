@@ -6,6 +6,7 @@ const app = express();
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const commentRouter = require('./routes/comment');
+const likeRouter = require('./routes/like');
 
 
 //Middleware
@@ -27,6 +28,6 @@ app.get('/', (req, res)=>{
 app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/comment', commentRouter)
-
+app.use('/like', likeRouter)
 
 module.exports = {app,}
