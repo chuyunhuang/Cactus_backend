@@ -7,6 +7,7 @@ const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const commentRouter = require('./routes/comment');
 const likeRouter = require('./routes/like');
+const searchRouter = require('./routes/search');
 
 //Middleware
 app.use(cors());
@@ -28,5 +29,6 @@ app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/comment', commentRouter)
 app.use('/like', likeRouter)
+app.use('/search', searchRouter)
 
 module.exports = {app,}
