@@ -12,12 +12,6 @@ followerService.read = (follower_id) =>{
     return db.any('SELECT following_id FROM followers WHERE follower_id = ${follower_id}', {follower_id})
 }
 
-//get one's follower
-followerService.read2 = (following_id) =>{
-    return db.any('SELECT follower_id FROM followers WHERE following_id = ${following_id}', {following_id})
-
-}
-
 followerService.delete = (follower_id, following_id) =>{
     return db.none('DELETE FROM followers WHERE follower_id = ${follower_id} AND following_id = ${following_id}', {follower_id, following_id})
 }
