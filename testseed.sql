@@ -8,6 +8,7 @@ CREATE TABLE users (
   username VARCHAR UNIQUE NOT NULL,
   email VARCHAR UNIQUE NOT NULL,
   avatar VARCHAR,  
+  userUID VARCHAR UNIQUE NULL,
   created_at TIMESTAMP DEFAULT NOW()
 
 );

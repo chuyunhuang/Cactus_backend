@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const admin = require('./firebase');
 
 const app = express();
 const userRouter = require('./routes/user');
@@ -16,11 +17,25 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+//Firebase-admin
+const checkFirebaseToken = (req, res, next) =>{
+    const token = req.body
 
+    admin.auth().verifyIdToken(token)
+    .then(function(decodedToken){
+        var uid = decodedToken.uid
+        next();
+    })
+    .catch(err =>{
+        res.json(err)
+    })
+}
 
-app.get('/test', (req, res)=>{
+app.post('/test', checkFirebaseToken, (req, res)=>{
     res.json({"express app working": true})
 });
+
+
 
 
 app.use('/user', userRouter)

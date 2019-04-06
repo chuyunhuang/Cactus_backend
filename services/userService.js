@@ -2,8 +2,8 @@ const db = require('./dbConnect');
 const userService = {}
 
 userService.create = (body)=>{
-    const {username, email, avatar} = body;
-    return db.none('INSERT INTO users (username, email, avatar) VALUES (${username}, ${email}, ${avatar})', {username, email, avatar})
+    const {username, email, avatar, useruid} = body;
+    return db.none('INSERT INTO users (username, email, avatar, useruid) VALUES (${username}, ${email}, ${avatar}, ${useruid})', {username, email, avatar, useruid})
 }
 
 userService.read = () =>{

@@ -7,7 +7,6 @@
     "start": "node index.js",
     "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$CODE_COVERAGE_TOKEN\" >> .coveralls.yml"
-
   },
   "keywords": [],
   "author": "",
@@ -16,6 +15,7 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "firebase-admin": "^7.2.0",
     "pg-promise": "^8.6.4"
   },
   "devDependencies": {
