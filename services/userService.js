@@ -10,6 +10,10 @@ userService.read = () =>{
     return db.any('SELECT * FROM users')
 }
 
+userService.readForSearch = (username) =>{
+    return db.any('SELECT * FROM users WHERE username = ${username}', {username})
+}
+
 userService.readbyuid = (useruid) =>{
     return db.any('SELECT username, avatar FROM users WHERE useruid = ${useruid}', {useruid})
 }

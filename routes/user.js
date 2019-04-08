@@ -42,13 +42,9 @@ userRouter.get('/', (req, res)=>{
 userRouter.get('/userprofile/:useruid', (req, res)=>{
     //const {useruid} = req.body
     //console.log('p', req.query)
-    const {useruid} = req.params;
-
-    console.log('was hit', req.params)
-    
+    const {useruid} = req.params;    
     userService.readbyuid(useruid)
     .then((data)=>{
-        console.log('backend!!!', data)
         res.status(200)
         res.json({
             'success': true,
@@ -60,6 +56,18 @@ userRouter.get('/userprofile/:useruid', (req, res)=>{
         res.json({
             'success': false,
             'err': err
+        })
+    })
+})
+
+userRouter.get('/searchuser/:username', (req, res)=>{
+    const {username} = req.params;
+    userService.readForSearch(username)
+    .then((data)=>{
+        res.status(200)
+        res.json({
+            'success': true,
+            'data': data
         })
     })
 })

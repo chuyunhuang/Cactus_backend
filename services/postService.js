@@ -7,8 +7,8 @@ postService.create = (body) =>{
     return db.none('INSERT INTO posts (author_id, image_url, caption) VALUES ( ${author_id}, ${image_url}, ${caption})', {author_id, image_url, caption})
 }
 
-postService.read = () =>{
-    return db.any('SELECT * from posts')
+postService.readNewsfeed = () =>{
+    return db.any('SELECT * FROM users INNER JOIN posts ON useruid = author_id')
 }
 
 postService.readbyuid = (useruid) =>{

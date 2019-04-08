@@ -20,9 +20,10 @@ postRouter.post('/', (req, res)=>{
     })
 })
 
-//Get post
+//Get post for Newsfeed
 postRouter.get('/', (req, res) =>{
-    postService.read()
+  
+    postService.readNewsfeed()
     .then((data)=>{
         res.status(200)
         res.json({
