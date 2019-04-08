@@ -2,16 +2,20 @@ const db = require('./dbConnect');
 const userService = {}
 
 userService.create = (body)=>{
-    const {username, email, avatar, useruid} = body;
-    return db.none('INSERT INTO users (username, email, avatar, useruid) VALUES (${username}, ${email}, ${avatar}, ${useruid})', {username, email, avatar, useruid})
+    const {username, email, avatar, useruid, token} = body;
+    return db.none('INSERT INTO users (username, email, avatar, useruid, token) VALUES (${username}, ${email}, ${avatar}, ${useruid}, ${token})', {username, email, avatar, useruid, token})
 }
 
 userService.read = () =>{
     return db.any('SELECT * FROM users')
 }
 
-userService.update = (id, username, email, avatar) =>{
-    return db.none('UPDATE users SET username = ${username}, email = ${email}, avatar = ${avatar} WHERE id = ${id}', {id, username, email, avatar})
+userService.readbyuid = (useruid) =>{
+    return db.any('SELECT username, avatar FROM users WHERE useruid = ${useruid}', {useruid})
+}
+
+userService.update = (uid, username, imgurl) =>{
+    return db.none('UPDATE users SET username = ${username}, avatar = ${imgurl} WHERE useruid =${uid}', {uid, username,imgurl})
 }
 
 userService.delete = (id) =>{

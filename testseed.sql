@@ -5,18 +5,19 @@ CREATE DATABASE cactus;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR UNIQUE NOT NULL,
+  username VARCHAR UNIQUE NULL,
   email VARCHAR UNIQUE NOT NULL,
   avatar VARCHAR,  
   userUID VARCHAR UNIQUE NULL,
+  token VARCHAR UNIQUE NULL,
   created_at TIMESTAMP DEFAULT NOW()
 
 );
 
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
-  author_id INT NOT NULL
-  REFERENCES users(id) 
+  author_id VARCHAR NOT NULL
+  REFERENCES users(userUID) 
   ON UPDATE CASCADE 
   ON DELETE CASCADE,
   image_url VARCHAR NOT NULL, 
@@ -33,8 +34,8 @@ CREATE TABLE comments (
     REFERENCES posts(id) 
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-    author_id INT NOT NULL
-    REFERENCES users(id) 
+    author_id VARCHAR NOT NULL
+    REFERENCES users(userUID) 
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     comment_text VARCHAR NOT NULL,
@@ -48,9 +49,9 @@ CREATE TABLE likes (
     REFERENCES posts(id) 
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-    like_author_id INT NOT NULL
-    REFERENCES users (id)
-    ON UPDATE CASCADE 
+    like_author_id VARCHAR NOT NULL
+    REFERENCES users(userUID) 
+    ON UPDATE CASCADE
     ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT NOW()
 
@@ -62,12 +63,12 @@ CREATE TABLE likes (
 
 CREATE TABLE followers (
     id SERIAL PRIMARY KEY,
-    follower_id INT NOT NULL
-    REFERENCES users (id) 
+    follower_id VARCHAR NOT NULL
+    REFERENCES users (userUID) 
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-    following_id INT NOT NULL
-    REFERENCES users (id) 
+    following_id VARCHAR NOT NULL
+    REFERENCES users (userUID) 
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT NOW()
@@ -80,21 +81,21 @@ CREATE TABLE followers (
 
     
 
-INSERT INTO users (username, email, avatar) VALUES 
-('Yun625', 'yun@gmail.com', 'prfoile.png'), 
-('MieMie', 'mie@gmail.com', 'miepicture.png'),
-('QQ', 'q@gmail.com', NULL),
-('Michelle', 'michelle@gmail.com', NULL),
-('Anne', 'lolo@gmail.com', NULL);
+INSERT INTO users (username, email, avatar, userUID) VALUES 
+('Yun625', 'yun@gmail.com', 'prfoile.png', 1), 
+('MieMie', 'mie@gmail.com', 'miepicture.png', 2),
+('QQ', 'q@gmail.com', NULL, 3),
+('Michelle', 'michelle@gmail.com', NULL, 4),
+('Anne', 'lolo@gmail.com', NULL, 5);
 
 INSERT INTO posts (author_id, image_url, caption, number_of_comments, number_of_likes) VALUES 
-(1, 'yuncuteplant.jpg', 'So cute!!!', 2, 15),
+(1, 'yuncuteplant.jpg', 'So cute!!!',15, 4),
 (2, 'miebeautifulplant.jpg', 'lovely!!', 5, 25),
 (3, 'qqplant.jpg', 'I just bought this today.', 2, 55);
 
 INSERT INTO comments (post_id, author_id, comment_text) VALUES 
 (1, 2, 'exmaple comment from Mie'),
-(1, 3, 'exmaple comment from Q '),
+(1, 3, 'exmaple comment from Q'),
 (2, 1, 'exmaple comment from Yun');
 
 INSERT INTO likes (post_id, like_author_id) VALUES

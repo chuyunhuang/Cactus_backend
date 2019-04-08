@@ -21,6 +21,7 @@ userRouter.post('/', (req, res)=>{
 
 //Read User
 userRouter.get('/', (req, res)=>{
+   
     userService.read()
     .then(data =>{
         res.status(200)
@@ -38,12 +39,37 @@ userRouter.get('/', (req, res)=>{
     })
 })
 
-//Update User
-userRouter.put('/:id', (req, res)=>{
-    const {id} = req.params;
-    const {username, email, avatar} =req.body;
+userRouter.get('/userprofile/:useruid', (req, res)=>{
+    //const {useruid} = req.body
+    //console.log('p', req.query)
+    const {useruid} = req.params;
 
-    userService.update(id, username, email, avatar)
+    console.log('was hit', req.params)
+    
+    userService.readbyuid(useruid)
+    .then((data)=>{
+        console.log('backend!!!', data)
+        res.status(200)
+        res.json({
+            'success': true,
+            'data': data
+        })
+    })
+    .catch((err)=>{
+        res.status(404)
+        res.json({
+            'success': false,
+            'err': err
+        })
+    })
+})
+
+//Update User
+userRouter.put('/update', (req, res)=>{
+  
+    const {uid, username, imgurl} =req.body;
+
+    userService.update(uid, username, imgurl)
     .then(()=>{
         res.status(200)
         res.json({"successfully updated user":true})

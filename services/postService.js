@@ -11,6 +11,10 @@ postService.read = () =>{
     return db.any('SELECT * from posts')
 }
 
+postService.readbyuid = (useruid) =>{
+    return db.any('SELECT image_url, caption FROM posts JOIN users ON useruid = author_id WHERE useruid = ${useruid}', {useruid})
+}
+
 postService.update = (id, image_url, caption) =>{
     return db.none('UPDATE posts SET image_url = ${image_url}, caption = ${caption} WHERE id = ${id}', {id, image_url, caption})
 }

@@ -36,6 +36,28 @@ postRouter.get('/', (req, res) =>{
         })
     })
 })
+
+postRouter.get('/userpost/:useruid', (req, res)=>{
+    
+    const {useruid} = req.params;
+    
+    postService.readbyuid(useruid)
+    .then((data)=>{
+        res.status(200)
+        res.json({
+            'success': true,
+            'data': data
+        })
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.json({
+            'success': false,
+            'err': err
+        })
+    })
+})
+
 //Update post
 postRouter.put('/:id', (req, res)=>{
     const {id} = req.params;
@@ -55,6 +77,7 @@ postRouter.put('/:id', (req, res)=>{
         })
     })
 })
+
 
 //Delete post
 postRouter.delete('/:id', (req, res)=>{
