@@ -81,29 +81,5 @@ CREATE TABLE followers (
 
     
 
-INSERT INTO users (username, email, avatar, userUID) VALUES 
-('Yun625', 'yun@gmail.com', 'prfoile.png', 1), 
-('MieMie', 'mie@gmail.com', 'miepicture.png', 2),
-('QQ', 'q@gmail.com', NULL, 3),
-('Michelle', 'michelle@gmail.com', NULL, 4),
-('Anne', 'lolo@gmail.com', NULL, 5);
 
-INSERT INTO posts (author_id, image_url, caption, number_of_comments, number_of_likes) VALUES 
-(1, 'yuncuteplant.jpg', 'So cute!!!',15, 4),
-(2, 'miebeautifulplant.jpg', 'lovely!!', 5, 25),
-(3, 'qqplant.jpg', 'I just bought this today.', 2, 55);
-
-INSERT INTO comments (post_id, author_id, comment_text) VALUES 
-(1, 2, 'exmaple comment from Mie'),
-(1, 3, 'exmaple comment from Q'),
-(2, 1, 'exmaple comment from Yun');
-
-INSERT INTO likes (post_id, like_author_id) VALUES
-(1, 3),
-(1, 2),
-(3, 2);
-
-INSERT INTO followers ( follower_id, following_id) VALUES
-(1, 2),
-(3, 2);
 

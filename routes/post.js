@@ -41,7 +41,6 @@ postRouter.get('/', (req, res) =>{
 postRouter.get('/userpost/:useruid', (req, res)=>{
     
     const {useruid} = req.params;
-    
     postService.readbyuid(useruid)
     .then((data)=>{
         res.status(200)
