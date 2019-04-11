@@ -43,6 +43,25 @@ followerRouter.get('/:follower_id', (req, res)=>{
     })
 })
 
+//read one's followers 
+followerRouter.get('/myfollower/:follower_id', (req, res)=>{
+    const {follower_id} = req.params
+    
+    followerService.readMyFollowers(follower_id)
+    .then(data =>{
+        res.status(200)
+        res.json({
+            'success': true,
+            'data': data
+        })
+    .catch(err=>{
+        res.status(400)
+        res.json(err)
+    })    
+    })
+
+})
+
 
 //Delete following
 followerRouter.delete('/', (req, res)=>{
