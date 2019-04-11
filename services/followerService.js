@@ -8,7 +8,7 @@ followerService.create = (body) =>{
 }
 
 //get one's following
-followerService.read = (follower_id) =>{
+followerService.readMyFollowing = (follower_id) =>{
     return db.any('SELECT following_id FROM followers WHERE follower_id = ${follower_id}', {follower_id})
 }
 

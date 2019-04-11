@@ -72,6 +72,22 @@ userRouter.get('/searchuser/:username', (req, res)=>{
     })
 })
 
+userRouter.get('/readuserprofile/:username', (req, res)=>{
+    const {username} = req.params;
+    userService.readForProfile(username)
+    .then((data)=>{
+        res.status(200)
+        res.json({
+            'success': true, 
+            'data':data
+        })
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.json({err})
+    })
+})
+
 //Update User
 userRouter.put('/update', (req, res)=>{
   

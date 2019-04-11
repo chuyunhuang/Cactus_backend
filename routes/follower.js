@@ -26,12 +26,12 @@ followerRouter.post('/', (req, res)=>{
 followerRouter.get('/:follower_id', (req, res)=>{
     const {follower_id} = req.params
 
-    followerService.read(follower_id)
+    followerService.readMyFollowing(follower_id)
     .then(data =>{
         res.status(200)
         res.json({
             "success": true,
-            "Currently following": data
+            "following": data
         })
     })
     .catch(err=>{
