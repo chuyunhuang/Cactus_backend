@@ -7,7 +7,10 @@ commentService.create = (post_id, author_id, comment_text) =>{
 }
 
 commentService.read = (post_id) =>{
-    return db.any('SELECT * FROM comments WHERE post_id = ${post_id}', {post_id})
+    return db.any(`SELECT * 
+	FROM comments JOIN users 
+		ON comments.author_id = users.useruid 
+			WHERE post_id = $[post_id]`, {post_id}) 
 }
 
 commentService.update = (id, comment_text) =>{

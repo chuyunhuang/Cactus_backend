@@ -26,8 +26,10 @@ commentRouter.post('/:post_id',(req, res)=>{
 //Read comment
 commentRouter.get('/:post_id',(req, res)=>{
     const {post_id} = req.params;
+    console.log('comment route was hit', req.params.post_id)
     commentService.read(post_id)
     .then((data)=>{
+        console.log(data)
         res.status(200)
         res.json({
             "success": true,
@@ -35,6 +37,7 @@ commentRouter.get('/:post_id',(req, res)=>{
         })
     })
     .catch(err=>{
+        console.log(err)
         res.status(400)
         res.json({
             "success": false,

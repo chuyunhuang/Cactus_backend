@@ -62,13 +62,20 @@ userRouter.get('/userprofile/:useruid', (req, res)=>{
 
 userRouter.get('/searchuser/:username', (req, res)=>{
     const {username} = req.params;
+    console.log(req.params.username)
     userService.readForSearch(username)
     .then((data)=>{
+        console.log('BACKEND', data)
         res.status(200)
         res.json({
             'success': true,
             'data': data
         })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(400)
+        res.json(err)
     })
 })
 
